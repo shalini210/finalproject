@@ -11,3 +11,13 @@ newuser.save()
 .then(()=>console.log("user saved"))
 .catch(()=>console.log("err"))
 }
+exports.getusers =async ()=>
+{
+    let users = [];
+    await userModel.find()
+    .then((d)=>{
+        console.log(d)
+        users = d
+    })
+    return users
+}
