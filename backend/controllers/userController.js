@@ -21,3 +21,11 @@ exports.getusers =async ()=>
     })
     return users
 }
+exports.getuserbyName =async (uname)=>
+{
+    let r ;
+    await userModel.findOne({name:uname})
+    .then((d)=>r = d)
+    .catch(()=>r="err")
+    return r;
+}

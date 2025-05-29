@@ -12,4 +12,11 @@ router.get("/",async (req,res)=>
     let users =await userController.getusers()
     res.send(users)
 })
+router.get("/userbyname/:name",async(req,res)=>
+{    
+let name = req.params.name
+let u =await userController.getuserbyName(name)
+res.send(u)
+
+})
 module.exports= router
