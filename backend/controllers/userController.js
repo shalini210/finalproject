@@ -29,3 +29,21 @@ exports.getuserbyName =async (uname)=>
     .catch(()=>r="err")
     return r;
 }
+exports.deleteuser =async (id)=>
+{
+    let msg = ""
+//    await userModel.findByIdAndDelete(id)
+    await userModel.deleteOne({_id:id})
+    .then((d)=>msg = d)
+    .catch((err)=>msg = err)
+    return msg 
+}
+exports.updateuser = async(id,newdata)=>
+{
+    let msg = "";
+    console.log(id)
+    await userModel.findByIdAndUpdate(id,newdata)
+    .then((d)=>msg = d)
+    .catch((err)=>msg = err)
+    return msg 
+}

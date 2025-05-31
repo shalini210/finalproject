@@ -1,0 +1,12 @@
+create a model for city with fields
+ name , state ,country, population ,
+ area ,official language , metro,
+ create endpoints 
+ //getallcities
+ //getcitybyname
+ //getcitybyState
+//getcitiesbylanguage
+//addcity //check if city is already present in that state
+//updatecity//check if city is already present in that state
+//deletecitybyId
+// 
