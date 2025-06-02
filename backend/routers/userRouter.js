@@ -10,7 +10,7 @@ res.send("user added")
 router.get("/",async (req,res)=>
 {
     let users =await userController.getusers()
-    res.send(users)
+    res.send({data:users})
 })
 router.get("/userbyname/:name",async(req,res)=>
 {    
