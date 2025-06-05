@@ -3,14 +3,12 @@ import axios from "axios"
 import { API_URL } from '../config/apidetails'
 
 export default function Allusers() {
-    const [usersUI,setusersUI] = useState()
-    
+    const [usersUI,setusersUI] = useState()    
     useEffect(()=>
     {
       axios.get(API_URL+"user")
       .then((d)=>
-        {
-    
+        {    
          let uitemp = (d.data.users).map((d)=><tr key={d._id}><td>{d.name}</td><td>{d.age}</td></tr>)
          setusersUI(uitemp)
     })

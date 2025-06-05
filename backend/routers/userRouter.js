@@ -3,9 +3,9 @@ const userController = require("../controllers/userController")
 const router = express.Router()
 router.post("/",(req,res)=>
 {
-let u = {name:req.body.name,age:req.body.age}
+let u = {name:req.body.name,age:parseInt(req.body.age)}
 userController.adduser(u)
-res.send("user added")
+res.send({msg:"user added"})
 })
 router.get("/",async (req,res)=>
 {
