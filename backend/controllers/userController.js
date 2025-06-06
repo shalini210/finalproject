@@ -1,15 +1,24 @@
 
 const userModel = require("../models/userModel")
 
-exports.adduser=(user)=>
+exports.adduser=async (user)=>
 {
     let newuser = new userModel({
         name:user.name,
         age:user.age
 })
-newuser.save()
-.then(()=>console.log("user saved"))
-.catch(()=>console.log("err"))
+let data = []
+let msg = ""
+await newuser.save()
+.then(async ()=>{
+    msg = "record inserted"
+    await userModel.find()
+    .then((d)=>data = d)
+}
+)
+.catch((err)=>msg = err)
+
+return {data:data,msg:msg}
 }
 exports.getusers =async ()=>
 {
@@ -32,11 +41,17 @@ exports.getuserbyName =async (uname)=>
 exports.deleteuser =async (id)=>
 {
     let msg = ""
+    let data = []
 //    await userModel.findByIdAndDelete(id)
     await userModel.deleteOne({_id:id})
-    .then((d)=>msg = d)
-    .catch((err)=>msg = err)
-    return msg 
+   .then(async ()=>{
+    msg = "record deleted"
+    await userModel.find()
+    .then((d)=>data = d)
+}
+)
+.catch((err)=>msg = err)
+    return {msg:msg,users:data }
 }
 exports.updateuser = async(id,newdata)=>
 {

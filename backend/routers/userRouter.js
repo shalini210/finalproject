@@ -1,11 +1,11 @@
 const express = require("express")
 const userController = require("../controllers/userController")
 const router = express.Router()
-router.post("/",(req,res)=>
+router.post("/",async (req,res)=>
 {
 let u = {name:req.body.name,age:parseInt(req.body.age)}
-userController.adduser(u)
-res.send({msg:"user added"})
+let obj = await userController.adduser(u)
+res.send({msg:obj.msg,users:obj.data})
 })
 router.get("/",async (req,res)=>
 {
@@ -21,8 +21,8 @@ res.send(u)
 router.delete("/:id",async (req,res)=>
 {
     let id = req.params.id
-    let msg = await userController.deleteuser(id)
-    res.send(msg)
+    let obj = await userController.deleteuser(id)
+    res.send(obj)
 })
 router.put("/",async(req,res)=>
 {
