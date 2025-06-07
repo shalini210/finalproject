@@ -32,8 +32,8 @@ router.put("/",async(req,res)=>
     let uage = req.body.age;
     let newuser = {name:uname,age:parseInt(uage)}
     // let condition = {_id:uid}
-    let msg = userController.updateuser(uid,newuser)
-    res.send(msg)
+    let obj = await userController.updateuser(uid,newuser)
+    res.send({msg:obj.msg,users:obj.data})
 
 
 })

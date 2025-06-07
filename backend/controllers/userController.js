@@ -57,8 +57,15 @@ exports.updateuser = async(id,newdata)=>
 {
     let msg = "";
     console.log(id)
+    let data = []
     await userModel.findByIdAndUpdate(id,newdata)
-    .then((d)=>msg = d)
+    .then(async (d)=>
+        {
+           msg = "record updated"
+            await userModel.find()
+            .then((d)=>data = d)
+        })
     .catch((err)=>msg = err)
-    return msg 
+    
+return {data:data,msg:msg}
 }

@@ -6,6 +6,8 @@ export default function Adduser() {
     // name:req.body.name,age:parseInt(req.body.age)
     let nameref = useRef()
     let ageref = useRef()
+    let btnref = useRef()
+    let idref = useRef()
     const [users,setusers]=useState([])
     useEffect(()=>
     {
@@ -16,13 +18,28 @@ export default function Adduser() {
     const add=()=>
     {
         let data = {name:nameref.current.value,age:ageref.current.value}
-        axios.post(API_URL+"user",data)
-        .then((d)=>{
-          alert(d.data.msg)
-          setusers(d.data.users)}
-    )
-        .catch((err)=>alert(err))
-empty()
+        if(btnref.current.value=="Add")
+          {
+                  axios.post(API_URL+"user",data)
+              .then((d)=>{
+              alert(d.data.msg)
+                setusers(d.data.users)}
+                )
+              .catch((err)=>alert(err))
+        }
+        else
+        {
+          //this is update case 
+          data.id = idref.current.value
+console.log(data)
+           axios.put(API_URL+"user",data)
+              .then((d)=>{
+              alert(d.data.msg)
+                setusers(d.data.users)}
+                )
+              .catch((err)=>alert(err))
+            }
+        empty()
     }
 
     const empty = ()=>
@@ -46,13 +63,20 @@ empty()
        setusers(d.data.users)
       })
     }
+    const setedit = (user)=>
+    {
+      nameref.current.value = user.name;
+      ageref.current.value = user.age
+      btnref.current.value = "Update"
+      idref.current.value = user._id
+    }
   return (
     <div>
     <div>Adduser
-
+    <input type="text" ref={idref}  disabled className='hidden'/>
         <p>Enter NAme : <input type="text" ref={nameref} className='border-1' /></p>
         <p>enter age : <input type="number" ref={ageref}  className='border-1'/></p>
-        <input type="button" value="Add user" onClick={()=>add()} className='h-8 w-24 bg-blue-400 text-white' />
+        <input type="button" value="Add" ref={btnref} onClick={()=>add()} className='h-8 w-24 bg-blue-400 text-white' />
     </div>
     <div>
 <table>
@@ -70,7 +94,7 @@ empty()
     <td className='border-1'>{user.name}</td>
     <td className='border-1'>{user.age}</td>
     <td className='border-1'><input type="button" 
-    value = "edit"/></td>
+    value = "edit" onClick={()=>setedit(user)}/></td>
     <td className='border-1'><input type="button" 
     value="delete" onClick={()=>deleteuser((user)._id)}/></td>
     </tr>
