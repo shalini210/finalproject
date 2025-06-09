@@ -46,6 +46,7 @@ console.log(data)
     {
       nameref.current.value=""
       ageref.current.value=""
+      btnref.current.value="Add"
     }
     const deleteuser =async (id)=>
     {
@@ -73,7 +74,7 @@ console.log(data)
   return (
     <div>
     <div>Adduser
-    <input type="text" ref={idref}  disabled className='hidden'/>
+    <input type="text" ref={idref}  disabled className=''/>
         <p>Enter NAme : <input type="text" ref={nameref} className='border-1' /></p>
         <p>enter age : <input type="number" ref={ageref}  className='border-1'/></p>
         <input type="button" value="Add" ref={btnref} onClick={()=>add()} className='h-8 w-24 bg-blue-400 text-white' />
