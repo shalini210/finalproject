@@ -15,8 +15,9 @@ export default function Adduser() {
       .then((d)=>setusers(d.data.users))
     },[])
 
-    const add=()=>
+    const add=(event)=>
     {
+      event.preventDefault()
         let data = {name:nameref.current.value,age:ageref.current.value}
         if(btnref.current.value=="Add")
           {
@@ -74,10 +75,15 @@ console.log(data)
   return (
     <div>
     <div>Adduser
+      <form onSubmit={(e)=>add(e)}>
     <input type="text" ref={idref}  disabled className=''/>
-        <p>Enter NAme : <input type="text" ref={nameref} className='border-1' /></p>
-        <p>enter age : <input type="number" ref={ageref}  className='border-1'/></p>
-        <input type="button" value="Add" ref={btnref} onClick={()=>add()} className='h-8 w-24 bg-blue-400 text-white' />
+        <p>Enter NAme : <input required type="text"
+         ref={nameref} className='border-1' /></p>
+        <p>enter age : <input required type="number"
+         ref={ageref}  className='border-1'/></p>
+        <input type="submit" value="Add" ref={btnref}
+          className='h-8 w-24 bg-blue-400 text-white' />
+        </form>
     </div>
     <div>
 <table>
