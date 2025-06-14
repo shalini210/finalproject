@@ -11,21 +11,27 @@ import AdminLogin from './components/admin/AdminLogin'
 import { useSelector } from 'react-redux'
 import AddBlog from './components/admin/AddBlog'
 import AdminNavbar from './components/admin/AdminNavbar'
+import UserRegistration from './components/user/UserRegistration'
+import UserLogin from './components/user/userLogin'
 function App() {
 let islogin = useSelector((s)=>(s.admin.islogin))
   return (
     <div>
       {/* Current counter is : {data} */}
       <div className='flex gap-4 h-9 bg-orange-400'>
+        <Link to="/registration">User Registration </Link>
+        <Link to="/userlogin">User login</Link>
       <Link to="/showusers">All users</Link>
       <Link to="/adduser">Add User</Link>
       <Link to="/adminHome">Admin</Link>
+
       </div>
       {islogin? <AdminNavbar></AdminNavbar>:""}
       <Routes>
         
         <Route path='/adminHome' element={<Adminhome></Adminhome>}> </Route>
-          
+          <Route path="/registration" element={<UserRegistration></UserRegistration>}></Route>
+          <Route path = "/userlogin" element = {<UserLogin></UserLogin>}></Route>
           <Route path='/addblog' element={<AddBlog></AddBlog>}></Route>
         
         <Route path='/adminLogin' element={<AdminLogin></AdminLogin>}></Route>
